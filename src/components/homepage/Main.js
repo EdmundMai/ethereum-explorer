@@ -19,6 +19,8 @@ const Navigation = styled.nav`
 const Explorer = styled.div``;
 
 const StyledLink = styled.a`
+  color: #ffffff;
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
