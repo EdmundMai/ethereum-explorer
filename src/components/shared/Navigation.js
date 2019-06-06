@@ -30,7 +30,7 @@ const StyledLink = styled.a`
 const SectionName = styled.span`
   color: #ffffff;
   font-size: 12px;
-  margin-top: 5px;
+  margin-top: 10px;
   text-transform: uppercase;
 `;
 
