@@ -21,12 +21,13 @@ export const BlockGrid = ({ blocks }) => {
     <Container>
       {chunksOfFour.map((chunk, i) => (
         <Row key={i}>
-          {chunk.map(({ number, transactions, timestamp }) => (
+          {chunk.map(({ number, transactions, timestamp, gasLimit }) => (
             <BlockCard
               key={number}
               blockNumber={number}
               timestamp={timestamp}
               transactions={transactions}
+              gasLimit={gasLimit}
             />
           ))}
         </Row>

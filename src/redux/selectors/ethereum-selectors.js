@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import _ from "lodash";
 
-import { hexToNumber, weiToGwei } from "../../helpers";
+import { weiToGwei } from "../../helpers";
 
 const getBlocks = state => state.ethereum.blocks;
 
@@ -10,7 +10,7 @@ export const getAverageGasPrice = createSelector([getBlocks], blocks => {
     _.chain(blocks)
       .map(({ transactions }) => transactions)
       .flatten()
-      .map(({ gasPrice }) => weiToGwei(hexToNumber(gasPrice)).valueOf())
+      .map(({ gasPrice }) => weiToGwei(gasPrice).valueOf())
       .map(parseFloat)
       .mean()
       .value() || 0;

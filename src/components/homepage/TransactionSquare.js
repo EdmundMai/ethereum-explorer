@@ -15,6 +15,7 @@ const Square = styled.a`
   height: 14px;
   background-color: white;
   margin: 1px 2px;
+  opacity: ${props => props.opacity + 0.2};
 `;
 
 const Tooltip = styled.div``;
@@ -52,13 +53,21 @@ const UsdPrice = styled.span`
   font-size: 10px;
 `;
 
-export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
+export const TransactionSquare = ({
+  opacity,
+  hash,
+  from,
+  to,
+  value,
+  ethToUsdPrice,
+}) => {
   const wei = hexToNumber(value);
   const ethAmount = weiToEth(wei);
 
   return (
     <Container>
       <Square
+        opacity={opacity}
         data-tip
         data-for={hash}
         target="_blank"

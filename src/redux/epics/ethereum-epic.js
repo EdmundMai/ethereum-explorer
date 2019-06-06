@@ -27,11 +27,15 @@ const fetchBlockEpic = action$ =>
 
       return from(InfuraAPI.getBlockByNumber(blockNumber)).pipe(
         map(({ data: { result } }) => {
-          const { transactions } = result;
           const number = hexToNumber(result.number);
           const timestamp = hexToNumber(result.timestamp);
           const gasLimit = hexToNumber(result.gasLimit);
           const gasUsed = hexToNumber(result.gasUsed);
+          const transactions = result.transactions.map(t => ({
+            ...t,
+            gasPrice: hexToNumber(t.gasPrice),
+            gas: hexToNumber(t.gas),
+          }));
 
           return ethereumActions.fetchBlockSuccess({
             number,

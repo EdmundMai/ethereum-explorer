@@ -85,7 +85,12 @@ const ButtonText = styled.div`
   text-transform: uppercase;
 `;
 
-export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
+export const BlockCard = ({
+  blockNumber,
+  timestamp,
+  transactions,
+  gasLimit,
+}) => {
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
   const [isViewingSecondPage, setIsViewingSecondPage] = useState(false);
 
@@ -122,8 +127,9 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
       <Grid>
         {chunksOfTen.map((chunk, i) => (
           <Row key={i}>
-            {chunk.map(({ hash, from, to, value }) => (
+            {chunk.map(({ hash, from, to, value, gas }) => (
               <TransactionSquare
+                opacity={gas / gasLimit}
                 key={hash}
                 hash={hash}
                 from={from}
