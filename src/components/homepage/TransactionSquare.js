@@ -5,14 +5,16 @@ import BigNumber from "bignumber.js";
 
 import { weiToEth, hexToNumber } from "../../helpers";
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+`;
 
 const Square = styled.a`
   display: inline-block;
   width: 14px;
   height: 14px;
   background-color: white;
-  margin: 2px 2px;
+  margin: 1px 2px;
 `;
 
 const Tooltip = styled.div``;

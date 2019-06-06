@@ -65,10 +65,13 @@ const Square = styled.div`
 
 const MoreTransactionsButton = styled.button`
   display: flex;
+  cursor: pointer;
   justify-content: space-between;
   width: 100%;
+  outline: none;
   background: none;
   border: none;
+  color: #dad9e6;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding: 2px 10px;
 `;
@@ -78,8 +81,13 @@ const Row = styled.div`
   margin-bottom: 2px;
 `;
 
+const ButtonText = styled.div`
+  text-transform: uppercase;
+`;
+
 export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
+  const [isViewingSecondPage, setIsViewingSecondPage] = useState(false);
 
   useEffect(() => {
     if (!ethToUsdPrice) {
@@ -95,7 +103,10 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
     }
   }, []);
 
-  const chunksOfTen = _.chunk(transactions.slice(0, 100), 10);
+  const paginatedTransactions = isViewingSecondPage
+    ? transactions.slice(100, 200)
+    : transactions.slice(0, 100);
+  const chunksOfTen = _.chunk(paginatedTransactions.slice(0, 100), 10);
 
   return (
     <Container>
@@ -124,10 +135,19 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
           </Row>
         ))}
       </Grid>
-      <MoreTransactionsButton>
-        <span>6 more TX</span>
-        <span>></span>
-      </MoreTransactionsButton>
+      {transactions.length > 100 && (
+        <MoreTransactionsButton
+          onClick={() => setIsViewingSecondPage(!isViewingSecondPage)}>
+          {isViewingSecondPage ? (
+            <ButtonText>Back</ButtonText>
+          ) : (
+            <React.Fragment>
+              <ButtonText>{transactions.length - 100} more TX</ButtonText>
+              <span>></span>
+            </React.Fragment>
+          )}
+        </MoreTransactionsButton>
+      )}
       <ReactTooltip place="right" type="light" effect="solid" />
     </Container>
   );

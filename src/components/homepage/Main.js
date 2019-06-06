@@ -19,7 +19,9 @@ const Navigation = styled.nav`
   justify-content: space-between;
 `;
 
-const Explorer = styled.div``;
+const Explorer = styled.div`
+  width: 100%;
+`;
 
 const StyledLink = styled.a`
   color: #ffffff;
@@ -49,7 +51,7 @@ export const Main = ({
 
       fetchBlockRange({
         startingBlockNumber: blockNumber,
-        endingBlockNumber: blockNumber - 1,
+        endingBlockNumber: blockNumber - 5,
       });
     });
   }, []);
