@@ -96,6 +96,7 @@ const MoreTransactionsButton = styled.button`
   color: #dad9e6;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   align-items: center;
+  visibility: ${props => (props.hide ? "hidden" : "visible")};
 `;
 
 const ButtonText = styled.div`
@@ -168,21 +169,20 @@ export const BlockCard = ({
           />
         ))}
       </Grid>
-      {transactions.length > 100 && (
-        <MoreTransactionsButton
-          onClick={() => setIsViewingFirstPage(!isViewingFirstPage)}>
-          {isViewingFirstPage ? (
-            <React.Fragment>
-              <ButtonText>{transactions.length - 100} more TX</ButtonText>
-              <CaretWrapper>
-                <Caret src={ICON_CARET_RIGHT} />
-              </CaretWrapper>
-            </React.Fragment>
-          ) : (
-            <ButtonText>Back</ButtonText>
-          )}
-        </MoreTransactionsButton>
-      )}
+      <MoreTransactionsButton
+        hide={transactions.length <= 100}
+        onClick={() => setIsViewingFirstPage(!isViewingFirstPage)}>
+        {isViewingFirstPage ? (
+          <React.Fragment>
+            <ButtonText>{transactions.length - 100} more TX</ButtonText>
+            <CaretWrapper>
+              <Caret src={ICON_CARET_RIGHT} />
+            </CaretWrapper>
+          </React.Fragment>
+        ) : (
+          <ButtonText>Back</ButtonText>
+        )}
+      </MoreTransactionsButton>
       <ReactTooltip place="right" type="light" effect="solid" />
     </Container>
   );

@@ -6,6 +6,9 @@ import BlockCard from "./BlockCard";
 
 const Container = styled.div`
   padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(1rem, 1fr));
+  grid-row-gap: 1em;
 `;
 
 const Row = styled.div`
@@ -14,22 +17,16 @@ const Row = styled.div`
 `;
 
 export const BlockGrid = ({ blocks }) => {
-  const chunksOfFour = _.chunk(blocks, 4);
-
   return (
     <Container>
-      {chunksOfFour.map((chunk, i) => (
-        <Row key={i}>
-          {chunk.map(({ number, transactions, timestamp, gasLimit }) => (
-            <BlockCard
-              key={number}
-              blockNumber={number}
-              timestamp={timestamp}
-              transactions={transactions}
-              gasLimit={gasLimit}
-            />
-          ))}
-        </Row>
+      {blocks.map(({ number, transactions, timestamp, gasLimit }) => (
+        <BlockCard
+          key={number}
+          blockNumber={number}
+          timestamp={timestamp}
+          transactions={transactions}
+          gasLimit={gasLimit}
+        />
       ))}
     </Container>
   );
