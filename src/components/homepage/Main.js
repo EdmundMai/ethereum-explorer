@@ -7,6 +7,7 @@ import BlockGrid from "./BlockGrid";
 
 import InfuraAPI from "../../services/infura-api";
 import { hexToNumber } from "../../helpers";
+import { DEFAULT_BLOCKS_SHOWN, BLOCKS_PER_LOAD } from "../../config";
 
 const Container = styled.div`
   display: flex;
@@ -21,7 +22,7 @@ const Footer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  padding: 20px 0 150px 0;
+  padding: 0 0 150px 0;
 `;
 
 const LoadMoreButton = styled.button`
@@ -54,7 +55,7 @@ export const Main = ({
 
         fetchBlockRange({
           startingBlockNumber: blockNumber,
-          endingBlockNumber: blockNumber - 1,
+          endingBlockNumber: blockNumber - DEFAULT_BLOCKS_SHOWN,
         });
       });
     },
@@ -78,7 +79,7 @@ export const Main = ({
               const { number: oldestBlockNumber } = blocks[blocks.length - 1];
               fetchBlockRange({
                 startingBlockNumber: oldestBlockNumber - 1,
-                endingBlockNumber: oldestBlockNumber - 4,
+                endingBlockNumber: oldestBlockNumber - (BLOCKS_PER_LOAD + 1),
               });
             }}>
             Load More
