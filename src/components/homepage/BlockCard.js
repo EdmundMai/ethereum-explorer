@@ -15,7 +15,6 @@ const Container = styled.div`
   display: flex;
   margin: 10px;
   flex-direction: column;
-  opacity: ${props => (props.isActive ? 1 : 0.5)};
 `;
 
 const Header = styled.div`
@@ -79,13 +78,7 @@ const Row = styled.div`
   margin-bottom: 2px;
 `;
 
-export const BlockCard = ({
-  blockNumber,
-  timestamp,
-  transactions,
-  isActive,
-  onMouseEnter,
-}) => {
+export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
 
   useEffect(() => {
@@ -105,7 +98,7 @@ export const BlockCard = ({
   const chunksOfTen = _.chunk(transactions.slice(0, 100), 10);
 
   return (
-    <Container isActive={isActive} onMouseEnter={onMouseEnter}>
+    <Container>
       <Header>
         <LeftHeader>
           <BlockNumber>#{blockNumber}</BlockNumber>

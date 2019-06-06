@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import _ from "lodash";
 
@@ -15,7 +15,6 @@ const Row = styled.div`
 `;
 
 export const BlockGrid = ({ blocks }) => {
-  const [activeBlockNumber, setActiveBlockNumber] = useState(null);
   const chunksOfFour = _.chunk(blocks, 4);
 
   return (
@@ -24,9 +23,7 @@ export const BlockGrid = ({ blocks }) => {
         <Row key={i}>
           {chunk.map(({ number, transactions, timestamp }) => (
             <BlockCard
-              onMouseEnter={() => setActiveBlockNumber(number)}
               key={number}
-              isActive={activeBlockNumber === number || !activeBlockNumber}
               blockNumber={number}
               timestamp={timestamp}
               transactions={transactions}
