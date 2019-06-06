@@ -14,7 +14,7 @@ const Square = styled.a`
   height: 14px;
   margin: 1px 2px;
   opacity: ${props =>
-    props.opacity > 1 ? 1 : Math.max(props.opacity, 0.2) / 1.0};
+    props.opacity > 1 ? 1 : Math.max(props.opacity, 0.1) / 1.0};
   width: 14px;
 `;
 
@@ -53,14 +53,7 @@ const UsdPrice = styled.span`
   font-size: 10px;
 `;
 
-export const TransactionSquare = ({
-  opacity,
-  hash,
-  from,
-  to,
-  value,
-  ethToUsdPrice,
-}) => {
+export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
   const wei = hexToNumber(value);
   const ethAmount = parseFloat(weiToEth(wei));
 

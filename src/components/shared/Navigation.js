@@ -9,22 +9,22 @@ import ICON_SETTINGS from "../../assets/images/icon-settings.png";
 import ICON_LOGOUT from "../../assets/images/icon-logout.png";
 
 const Container = styled.nav`
-  width: 100px;
   background: #6962aa;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100px;
 `;
 
 const StyledLink = styled.a`
-  color: #ffffff;
-  flex-direction: column;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100px;
   background-color: ${props => (props.active ? "#564F96" : "none")};
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: center;
+  text-decoration: none;
 `;
 
 const SectionName = styled.span`
@@ -35,15 +35,15 @@ const SectionName = styled.span`
 `;
 
 const Logo = styled.img`
-  width: 50px;
   height: 50px;
   object-fit: contain;
+  width: 50px;
 `;
 
 const Icon = styled.img`
-  width: 25px;
   height: 25px;
   object-fit: contain;
+  width: 25px;
 `;
 
 const NavigationSection = styled.div``;

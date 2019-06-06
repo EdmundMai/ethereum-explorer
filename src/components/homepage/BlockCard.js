@@ -114,12 +114,7 @@ const Caret = styled.img`
   width: 8px;
 `;
 
-export const BlockCard = ({
-  blockNumber,
-  timestamp,
-  transactions,
-  gasLimit,
-}) => {
+export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
   const [isViewingFirstPage, setIsViewingFirstPage] = useState(true);
 
@@ -159,9 +154,8 @@ export const BlockCard = ({
         </RightHeader>
       </Header>
       <Grid>
-        {paginatedTransactions.map(({ hash, from, to, value, gas }) => (
+        {paginatedTransactions.map(({ hash, from, to, value }) => (
           <TransactionSquare
-            opacity={gas / gasLimit}
             key={hash}
             hash={hash}
             from={from}

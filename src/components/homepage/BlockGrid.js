@@ -13,13 +13,12 @@ const Container = styled.div`
 export const BlockGrid = ({ blocks }) => {
   return (
     <Container>
-      {blocks.map(({ number, transactions, timestamp, gasLimit }) => (
+      {blocks.map(({ number, transactions, timestamp }) => (
         <BlockCard
           key={number}
           blockNumber={number}
           timestamp={timestamp}
           transactions={transactions}
-          gasLimit={gasLimit}
         />
       ))}
     </Container>
