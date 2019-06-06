@@ -18,14 +18,14 @@ const Explorer = styled.div`
 `;
 
 const Footer = styled.div`
-  padding: 20px 0;
+  padding: 20px 0 150px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const LoadMoreButton = styled.button`
-  border: 1px solid #827DAD;
+  border: 1px solid #827dad;
   outline: none;
   border-radius: 20px;
   padding: 10px 40px;
@@ -46,17 +46,20 @@ export const Main = ({
 }) => {
   const [latestBlockNumber, setLatestBlockNumber] = useState(0);
 
-  useEffect(() => {
-    InfuraAPI.getLatestBlockNumber().then(({ data: { result } }) => {
-      const blockNumber = hexToNumber(result);
-      setLatestBlockNumber(blockNumber);
+  useEffect(
+    () => {
+      InfuraAPI.getLatestBlockNumber().then(({ data: { result } }) => {
+        const blockNumber = hexToNumber(result);
+        setLatestBlockNumber(blockNumber);
 
-      fetchBlockRange({
-        startingBlockNumber: blockNumber,
-        endingBlockNumber: blockNumber - 1,
+        fetchBlockRange({
+          startingBlockNumber: blockNumber,
+          endingBlockNumber: blockNumber - 1,
+        });
       });
-    });
-  }, []);
+    },
+    [fetchBlockRange]
+  );
 
   return (
     <Container>

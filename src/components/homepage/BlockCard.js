@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment";
-import _ from "lodash";
 import ReactTooltip from "react-tooltip";
 
 import CoinGeckoAPI from "../../services/coin-gecko-api";
@@ -124,19 +123,22 @@ export const BlockCard = ({
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
   const [isViewingFirstPage, setIsViewingFirstPage] = useState(true);
 
-  useEffect(() => {
-    if (!ethToUsdPrice) {
-      const date = moment(timestamp * 1000).format("DD-MM-YYYY");
-      CoinGeckoAPI.getUsdPrice({ date }).then(({ data }) => {
-        const {
-          market_data: {
-            current_price: { usd },
-          },
-        } = data;
-        setEthToUsdPrice(usd);
-      });
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (!ethToUsdPrice) {
+        const date = moment(timestamp * 1000).format("DD-MM-YYYY");
+        CoinGeckoAPI.getUsdPrice({ date }).then(({ data }) => {
+          const {
+            market_data: {
+              current_price: { usd },
+            },
+          } = data;
+          setEthToUsdPrice(usd);
+        });
+      }
+    },
+    [ethToUsdPrice, timestamp]
+  );
 
   const paginatedTransactions = isViewingFirstPage
     ? transactions.slice(0, 100)

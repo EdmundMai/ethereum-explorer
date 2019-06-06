@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import _ from "lodash";
 
 import BlockCard from "./BlockCard";
 
@@ -9,11 +8,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, minmax(1rem, 1fr));
   grid-row-gap: 1em;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-bottom: 20px;
 `;
 
 export const BlockGrid = ({ blocks }) => {

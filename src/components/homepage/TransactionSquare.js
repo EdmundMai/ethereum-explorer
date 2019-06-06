@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
-import BigNumber from "bignumber.js";
 
 import { weiToEth, hexToNumber } from "../../helpers";
 
@@ -15,7 +14,8 @@ const Square = styled.a`
   height: 14px;
   background-color: white;
   margin: 1px 2px;
-  opacity: ${props => props.opacity + 0.2};
+  opacity: ${props =>
+    props.opacity > 1 ? 1 : Math.max(props.opacity, 0.2) / 1.0};
 `;
 
 const Tooltip = styled.div``;
@@ -62,12 +62,12 @@ export const TransactionSquare = ({
   ethToUsdPrice,
 }) => {
   const wei = hexToNumber(value);
-  const ethAmount = weiToEth(wei);
+  const ethAmount = parseFloat(weiToEth(wei));
 
   return (
     <Container>
       <Square
-        opacity={opacity}
+        opacity={ethAmount}
         data-tip
         data-for={hash}
         target="_blank"
