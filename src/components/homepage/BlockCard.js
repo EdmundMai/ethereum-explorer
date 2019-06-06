@@ -77,16 +77,11 @@ const TransactionCount = styled.h5`
 
 const Grid = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
   padding: 15px;
-`;
-
-const Square = styled.div`
-  width: 15px;
-  height: 15px;
-  background-color: white;
-  margin: 2px 2px;
+  display: grid;
+  grid-template-columns: repeat(10, minmax(1rem, 1fr));
+  grid-template-rows: repeat(10, minmax(1rem, 1fr));
+  grid-auto-rows: 1fr;
 `;
 
 const MoreTransactionsButton = styled.button`
@@ -101,11 +96,6 @@ const MoreTransactionsButton = styled.button`
   color: #dad9e6;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   align-items: center;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin-bottom: 2px;
 `;
 
 const ButtonText = styled.div`
@@ -131,7 +121,7 @@ export const BlockCard = ({
   gasLimit,
 }) => {
   const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
-  const [isViewingSecondPage, setIsViewingSecondPage] = useState(false);
+  const [isViewingFirstPage, setIsViewingFirstPage] = useState(true);
 
   useEffect(() => {
     if (!ethToUsdPrice) {
@@ -147,10 +137,9 @@ export const BlockCard = ({
     }
   }, []);
 
-  const paginatedTransactions = isViewingSecondPage
-    ? transactions.slice(100, 200)
-    : transactions.slice(0, 100);
-  const chunksOfTen = _.chunk(paginatedTransactions.slice(0, 100), 10);
+  const paginatedTransactions = isViewingFirstPage
+    ? transactions.slice(0, 100)
+    : transactions.slice(100, 200);
 
   return (
     <Container>
@@ -167,34 +156,30 @@ export const BlockCard = ({
         </RightHeader>
       </Header>
       <Grid>
-        {chunksOfTen.map((chunk, i) => (
-          <Row key={i}>
-            {chunk.map(({ hash, from, to, value, gas }) => (
-              <TransactionSquare
-                opacity={gas / gasLimit}
-                key={hash}
-                hash={hash}
-                from={from}
-                to={to}
-                value={value}
-                ethToUsdPrice={ethToUsdPrice}
-              />
-            ))}
-          </Row>
+        {paginatedTransactions.map(({ hash, from, to, value, gas }) => (
+          <TransactionSquare
+            opacity={gas / gasLimit}
+            key={hash}
+            hash={hash}
+            from={from}
+            to={to}
+            value={value}
+            ethToUsdPrice={ethToUsdPrice}
+          />
         ))}
       </Grid>
       {transactions.length > 100 && (
         <MoreTransactionsButton
-          onClick={() => setIsViewingSecondPage(!isViewingSecondPage)}>
-          {isViewingSecondPage ? (
-            <ButtonText>Back</ButtonText>
-          ) : (
+          onClick={() => setIsViewingFirstPage(!isViewingFirstPage)}>
+          {isViewingFirstPage ? (
             <React.Fragment>
               <ButtonText>{transactions.length - 100} more TX</ButtonText>
               <CaretWrapper>
                 <Caret src={ICON_CARET_RIGHT} />
               </CaretWrapper>
             </React.Fragment>
+          ) : (
+            <ButtonText>Back</ButtonText>
           )}
         </MoreTransactionsButton>
       )}
