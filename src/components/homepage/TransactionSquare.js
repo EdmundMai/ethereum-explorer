@@ -9,13 +9,13 @@ const Container = styled.div`
 `;
 
 const Square = styled.a`
-  display: inline-block;
-  width: 14px;
-  height: 14px;
   background-color: white;
+  display: inline-block;
+  height: 14px;
   margin: 1px 2px;
   opacity: ${props =>
     props.opacity > 1 ? 1 : Math.max(props.opacity, 0.2) / 1.0};
+  width: 14px;
 `;
 
 const Tooltip = styled.div``;
@@ -31,16 +31,16 @@ const AddressInfo = styled.div`
 `;
 
 const InfoType = styled.h5`
-  margin: 0;
-  font-size: 10px;
-  text-transform: uppercase;
   color: #666666;
+  font-size: 10px;
+  margin: 0;
+  text-transform: uppercase;
 `;
 
 const Value = styled.h5`
-  margin: 0;
-  font-size: 10px;
   color: #3a3479;
+  font-size: 10px;
+  margin: 0;
 `;
 
 const PriceInfo = styled.div`

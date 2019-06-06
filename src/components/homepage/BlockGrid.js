@@ -4,10 +4,10 @@ import styled from "styled-components";
 import BlockCard from "./BlockCard";
 
 const Container = styled.div`
-  padding: 50px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(1rem, 1fr));
   grid-row-gap: 1em;
+  grid-template-columns: repeat(4, minmax(1rem, 1fr));
+  padding: 50px;
 `;
 
 export const BlockGrid = ({ blocks }) => {

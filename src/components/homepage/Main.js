@@ -13,28 +13,28 @@ const Container = styled.div`
 `;
 
 const Explorer = styled.div`
-  width: 100%;
   background-color: #494389;
+  width: 100%;
 `;
 
 const Footer = styled.div`
-  padding: 20px 0 150px 0;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding: 20px 0 150px 0;
 `;
 
 const LoadMoreButton = styled.button`
-  border: 1px solid #827dad;
-  outline: none;
-  border-radius: 20px;
-  padding: 10px 40px;
-  color: #ffffff;
-  font-size: 14px;
   background-color: #726da3;
-  text-transform: uppercase;
+  border-radius: 20px;
+  border: 1px solid #827dad;
   border: none;
+  color: #ffffff;
   cursor: pointer;
+  font-size: 14px;
+  outline: none;
+  padding: 10px 40px;
+  text-transform: uppercase;
 `;
 
 export const Main = ({

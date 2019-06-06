@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 50px;
   background-color: #433d7b;
   display: flex;
+  padding: 50px;
 `;
 const Statistic = styled.div`
   margin-right: 20px;
@@ -12,11 +12,11 @@ const Statistic = styled.div`
 `;
 
 const Title = styled.h4`
-  text-transform: uppercase;
-  font-size: 15px;
   color: #9f9cbd;
-  margin: 0;
+  font-size: 15px;
   margin-bottom: 10px;
+  margin: 0;
+  text-transform: uppercase;
 `;
 
 const Value = styled.div`
