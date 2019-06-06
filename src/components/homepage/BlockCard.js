@@ -95,6 +95,7 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
           <Row key={i}>
             {chunk.map(({ hash, from, to, value, input }) => (
               <TransactionSquare
+                timestamp={timestamp}
                 key={hash}
                 hash={hash}
                 from={from}
