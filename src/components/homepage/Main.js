@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import Header from "./Header";
-import Blocks from "./Blocks";
+import BlockGrid from "./BlockGrid";
+
+import InfuraAPI from "../../services/infura-api";
+import { hexToNumber } from "../../helpers";
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +33,21 @@ const StyledLink = styled.a`
 
 const NavigationSection = styled.div``;
 
-export const Main = () => {
+export const Main = ({ blocks, fetchBlockRange }) => {
+  const [latestBlockNumber, setLatestBlockNumber] = useState(0);
+
+  useEffect(() => {
+    InfuraAPI.getLatestBlockNumber().then(({ data: { result } }) => {
+      const blockNumber = hexToNumber(result);
+      setLatestBlockNumber(blockNumber);
+
+      fetchBlockRange({
+        startingBlockNumber: blockNumber,
+        endingBlockNumber: blockNumber - 12,
+      });
+    });
+  }, []);
+
   return (
     <Container>
       <Navigation>
@@ -46,12 +63,12 @@ export const Main = () => {
       </Navigation>
       <Explorer>
         <Header
-          currentBlock={123123123}
+          currentBlock={latestBlockNumber}
           averageGasPrice={87}
           averageBlockSize={8.2}
           averagaeBlockFullness={0.88}
         />
-        <Blocks />
+        <BlockGrid blocks={blocks} />
       </Explorer>
     </Container>
   );

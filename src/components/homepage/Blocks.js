@@ -18,39 +18,39 @@ export const Blocks = () => (
     <Row>
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
     </Row>
     <Row>
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
       <BlockCard
         blockNumber={8123123}
-        minedAt={"32 seconds ago"}
+        timestamp={"32 seconds ago"}
         transactions={[1, 2, 3, 4, 5]}
       />
     </Row>

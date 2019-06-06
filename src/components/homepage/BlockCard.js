@@ -66,18 +66,18 @@ const MoreTransactionsButton = styled.button`
   padding: 2px 10px;
 `;
 
-export const BlockCard = ({ blockNumber, minedAt, transactions }) => (
+export const BlockCard = ({ blockNumber, timestamp, transactions }) => (
   <Container>
     <Header>
       <LeftHeader>
         <BlockNumber>#{blockNumber}</BlockNumber>
-        <MinedAgo>mined {minedAt}</MinedAgo>
+        <MinedAgo>mined {timestamp}</MinedAgo>
       </LeftHeader>
       <RightHeader>
         <TransactionCount>{transactions.length} TXs</TransactionCount>
       </RightHeader>
     </Header>
-    <Grid>{transactions.map(t => <Square />)}</Grid>
+    <Grid>{transactions.map((t, i) => <Square key={i} />)}</Grid>
     <MoreTransactionsButton>
       <span>6 more TX</span>
       <span>></span>
