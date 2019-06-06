@@ -18,10 +18,13 @@ const Square = styled.a`
   width: 14px;
 `;
 
-const Tooltip = styled.div``;
+const Tooltip = styled.div`
+  padding: 10px 0;
+`;
 
 const SenderInfo = styled.div`
   display: flex;
+  margin-bottom: 15px;
 `;
 
 const AddressInfo = styled.div`
@@ -32,15 +35,16 @@ const AddressInfo = styled.div`
 
 const InfoType = styled.h5`
   color: #666666;
-  font-size: 10px;
+  font-size: 12px;
   margin: 0;
   text-transform: uppercase;
 `;
 
 const Value = styled.h5`
   color: #3a3479;
-  font-size: 10px;
+  font-size: 13px;
   margin: 0;
+  letter-spacing: 1px;
 `;
 
 const PriceInfo = styled.div`
@@ -49,8 +53,8 @@ const PriceInfo = styled.div`
 `;
 
 const UsdPrice = styled.span`
+  margin-left: 5px;
   color: #7e7e7e;
-  font-size: 10px;
 `;
 
 export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
