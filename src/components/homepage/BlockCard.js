@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import moment from "moment";
+import _ from "lodash";
 
 const Container = styled.div`
   background-color: #746fa0;
@@ -13,6 +15,7 @@ const Container = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
@@ -22,13 +25,13 @@ const LeftHeader = styled.div`
 `;
 
 const BlockNumber = styled.h5`
-  font-size: 13px;
+  font-size: 11px;
   color: #ffffff;
   margin: 0;
 `;
 
 const MinedAgo = styled.h5`
-  font-size: 13px;
+  font-size: 11px;
   color: #d9d8e5;
   margin: 0;
 `;
@@ -36,24 +39,23 @@ const MinedAgo = styled.h5`
 const RightHeader = styled.div``;
 
 const TransactionCount = styled.h5`
-  font-size: 13px;
+  font-size: 11px;
   color: #ffffff;
   margin: 0;
 `;
 
 const Grid = styled.div`
   flex: 1;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: 10px;
-  grid-row-gap: 10px;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
 `;
 
 const Square = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   background-color: white;
+  margin: 2px 2px;
 `;
 
 const MoreTransactionsButton = styled.button`
@@ -66,23 +68,36 @@ const MoreTransactionsButton = styled.button`
   padding: 2px 10px;
 `;
 
-export const BlockCard = ({ blockNumber, timestamp, transactions }) => (
-  <Container>
-    <Header>
-      <LeftHeader>
-        <BlockNumber>#{blockNumber}</BlockNumber>
-        <MinedAgo>mined {timestamp}</MinedAgo>
-      </LeftHeader>
-      <RightHeader>
-        <TransactionCount>{transactions.length} TXs</TransactionCount>
-      </RightHeader>
-    </Header>
-    <Grid>{transactions.map((t, i) => <Square key={i} />)}</Grid>
-    <MoreTransactionsButton>
-      <span>6 more TX</span>
-      <span>></span>
-    </MoreTransactionsButton>
-  </Container>
-);
+const Row = styled.div`
+  display: flex;
+  margin-bottom: 2px;
+`;
+
+export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
+  const chunksOfTen = _.chunk(transactions.slice(0, 100), 10);
+
+  return (
+    <Container>
+      <Header>
+        <LeftHeader>
+          <BlockNumber>#{blockNumber}</BlockNumber>
+          <MinedAgo>mined {moment(timestamp * 1000).fromNow()}</MinedAgo>
+        </LeftHeader>
+        <RightHeader>
+          <TransactionCount>{transactions.length} TXs</TransactionCount>
+        </RightHeader>
+      </Header>
+      <Grid>
+        {chunksOfTen.map(chunk => (
+          <Row>{chunk.map(({ hash }) => <Square key={hash} />)}</Row>
+        ))}
+      </Grid>
+      <MoreTransactionsButton>
+        <span>6 more TX</span>
+        <span>></span>
+      </MoreTransactionsButton>
+    </Container>
+  );
+};
 
 export default BlockCard;

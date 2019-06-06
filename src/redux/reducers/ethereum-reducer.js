@@ -1,4 +1,5 @@
 import ethereumActions from "../actions/ethereum-actions";
+import _ from "lodash";
 
 const initState = {
   blocks: [],
@@ -7,12 +8,13 @@ const initState = {
 const blockGenerator = ({ number, timestamp, transactions }) => ({
   number,
   timestamp,
-  transactions: transactions.map(({ from, to, value, input }) =>
-    transactionGenerator({ from, to, value, input })
+  transactions: transactions.map(({ hash, from, to, value, input }) =>
+    transactionGenerator({ hash, from, to, value, input })
   ),
 });
 
-const transactionGenerator = ({ from, to, value, input }) => ({
+const transactionGenerator = ({ hash, from, to, value, input }) => ({
+  hash,
   from,
   to,
   value,
@@ -26,10 +28,14 @@ export default (state = initState, action) => {
 
       return {
         ...state,
-        blocks: [
-          ...state.blocks,
-          blockGenerator({ number, timestamp, transactions }),
-        ],
+        blocks: _.orderBy(
+          [
+            ...state.blocks,
+            blockGenerator({ number, timestamp, transactions }),
+          ],
+          ["number"],
+          ["desc"]
+        ),
       };
 
     default:
