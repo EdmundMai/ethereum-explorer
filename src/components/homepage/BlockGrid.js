@@ -6,7 +6,6 @@ import BlockCard from "./BlockCard";
 
 const Container = styled.div`
   padding: 20px;
-  background-color: #494389;
 `;
 
 const Row = styled.div`

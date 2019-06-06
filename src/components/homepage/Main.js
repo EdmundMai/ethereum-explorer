@@ -21,6 +21,7 @@ const Navigation = styled.nav`
 
 const Explorer = styled.div`
   width: 100%;
+  background-color: #494389;
 `;
 
 const StyledLink = styled.a`
@@ -34,6 +35,25 @@ const StyledLink = styled.a`
 `;
 
 const NavigationSection = styled.div``;
+
+const Footer = styled.div`
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LoadMoreButton = styled.button`
+  outline: none;
+  border-radius: 20px;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: 12px;
+  background-color: #726da3;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+`;
 
 export const Main = ({
   blocks,
@@ -77,6 +97,18 @@ export const Main = ({
           averagaeBlockFullness={averageBlockFullness}
         />
         <BlockGrid blocks={blocks} />
+        <Footer>
+          <LoadMoreButton
+            onClick={() => {
+              const { number: oldestBlockNumber } = blocks[blocks.length - 1];
+              fetchBlockRange({
+                startingBlockNumber: oldestBlockNumber - 1,
+                endingBlockNumber: oldestBlockNumber - 4,
+              });
+            }}>
+            Load More
+          </LoadMoreButton>
+        </Footer>
       </Explorer>
     </Container>
   );
