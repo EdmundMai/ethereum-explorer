@@ -2,19 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 50px;
   background-color: #433d7b;
   display: flex;
 `;
 const Statistic = styled.div`
   margin-right: 20px;
-  min-width: 140px;
+  min-width: 275px;
 `;
 
 const Title = styled.h4`
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 15px;
   color: #9f9cbd;
+  margin: 0;
+  margin-bottom: 10px;
 `;
 
 const Value = styled.div`
@@ -23,11 +25,11 @@ const Value = styled.div`
 `;
 
 const Amount = styled.span`
-  font-size: 30px;
+  font-size: 45px;
 `;
 
 const Unit = styled.span`
-  font-size: 14px;
+  font-size: 20px;
   margin-left: 2px;
 `;
 

@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
 body,
 input,
 button {
@@ -8,6 +18,5 @@ button {
 
 #root {
   min-width: 800px;
-  max-width: 900px;
   margin: 0 auto;
 }

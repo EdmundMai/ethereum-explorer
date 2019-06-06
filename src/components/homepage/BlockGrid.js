@@ -5,7 +5,7 @@ import _ from "lodash";
 import BlockCard from "./BlockCard";
 
 const Container = styled.div`
-  padding: 20px;
+  padding: 50px;
 `;
 
 const Row = styled.div`

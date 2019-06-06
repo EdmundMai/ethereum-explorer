@@ -25,11 +25,12 @@ const Footer = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
+  border: 1px solid #827DAD;
   outline: none;
   border-radius: 20px;
-  padding: 10px 30px;
+  padding: 10px 40px;
   color: #ffffff;
-  font-size: 12px;
+  font-size: 14px;
   background-color: #726da3;
   text-transform: uppercase;
   border: none;

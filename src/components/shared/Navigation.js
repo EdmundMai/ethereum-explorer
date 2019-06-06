@@ -9,7 +9,7 @@ import ICON_SETTINGS from "../../assets/images/icon-settings.png";
 import ICON_LOGOUT from "../../assets/images/icon-logout.png";
 
 const Container = styled.nav`
-  width: 75px;
+  width: 100px;
   background: #6962aa;
   display: flex;
   flex-direction: column;
@@ -23,24 +23,26 @@ const StyledLink = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70px;
+  height: 100px;
   background-color: ${props => (props.active ? "#564F96" : "none")};
 `;
 
 const SectionName = styled.span`
   color: #ffffff;
-  font-size: 9px;
+  font-size: 12px;
+  margin-top: 5px;
+  text-transform: uppercase;
 `;
 
 const Logo = styled.img`
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 `;
 
 const Icon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   object-fit: contain;
 `;
 
