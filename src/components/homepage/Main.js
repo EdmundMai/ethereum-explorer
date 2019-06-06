@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+import Navigation from "../shared/Navigation";
 import Header from "./Header";
 import BlockGrid from "./BlockGrid";
 
@@ -11,30 +12,10 @@ const Container = styled.div`
   display: flex;
 `;
 
-const Navigation = styled.nav`
-  width: 75px;
-  background: #6962aa;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 const Explorer = styled.div`
   width: 100%;
   background-color: #494389;
 `;
-
-const StyledLink = styled.a`
-  color: #ffffff;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50px;
-  font-size: 9px;
-`;
-
-const NavigationSection = styled.div``;
 
 const Footer = styled.div`
   padding: 20px 0;
@@ -71,24 +52,14 @@ export const Main = ({
 
       fetchBlockRange({
         startingBlockNumber: blockNumber,
-        endingBlockNumber: blockNumber - 5,
+        endingBlockNumber: blockNumber - 1,
       });
     });
   }, []);
 
   return (
     <Container>
-      <Navigation>
-        <NavigationSection>
-          <StyledLink href="/">Dashboard</StyledLink>
-          <StyledLink href="/">Projects</StyledLink>
-          <StyledLink href="/">Explorer</StyledLink>
-        </NavigationSection>
-        <NavigationSection>
-          <StyledLink href="/">Settings</StyledLink>
-          <StyledLink href="/">Logout</StyledLink>
-        </NavigationSection>
-      </Navigation>
+      <Navigation />
       <Explorer>
         <Header
           currentBlock={latestBlockNumber.toLocaleString()}
