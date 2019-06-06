@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import moment from "moment";
 import _ from "lodash";
 import ReactTooltip from "react-tooltip";
+
+import CoinGeckoAPI from "../../services/coin-gecko-api";
 
 import TransactionSquare from "./TransactionSquare";
 
@@ -77,6 +79,22 @@ const Row = styled.div`
 `;
 
 export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
+  const [ethToUsdPrice, setEthToUsdPrice] = useState(0);
+
+  useEffect(() => {
+    if (!ethToUsdPrice) {
+      const date = moment(timestamp * 1000).format("DD-MM-YYYY");
+      CoinGeckoAPI.getUsdPrice({ date }).then(({ data }) => {
+        const {
+          market_data: {
+            current_price: { usd },
+          },
+        } = data;
+        setEthToUsdPrice(usd);
+      });
+    }
+  }, []);
+
   const chunksOfTen = _.chunk(transactions.slice(0, 100), 10);
 
   return (
@@ -95,13 +113,12 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
           <Row key={i}>
             {chunk.map(({ hash, from, to, value, input }) => (
               <TransactionSquare
-                timestamp={timestamp}
                 key={hash}
                 hash={hash}
                 from={from}
                 to={to}
                 value={value}
-                input={input}
+                ethToUsdPrice={ethToUsdPrice}
               />
             ))}
           </Row>

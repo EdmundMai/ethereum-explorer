@@ -27,9 +27,7 @@ const fetchBlockEpic = action$ =>
 
       return from(InfuraAPI.getBlockByNumber(blockNumber)).pipe(
         map(({ data: { result } }) => {
-          // console.log("xxxxx: ", result);
           const { transactions } = result;
-          console.log("ttttttttttttt: ", transactions[0]);
           const number = hexToNumber(result.number);
           const timestamp = hexToNumber(result.timestamp);
 

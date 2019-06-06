@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import _ from "lodash";
-import moment from "moment";
 import ReactTooltip from "react-tooltip";
-import Web3 from "web3";
 import BigNumber from "bignumber.js";
 
-import CoinGeckoAPI from "../../services/coin-gecko-api";
 import { weiToEth, hexToNumber } from "../../helpers";
 
 const Container = styled.div``;
@@ -54,30 +50,7 @@ const UsdPrice = styled.span`
   font-size: 10px;
 `;
 
-export const TransactionSquare = ({
-  timestamp,
-  hash,
-  from,
-  to,
-  value,
-  input,
-}) => {
-  const [usdPrice, setUsdPrice] = useState(0);
-
-  const fetchUsd = () => {
-    if (!usdPrice) {
-      const date = moment(timestamp * 1000).format("DD-MM-YYYY");
-      CoinGeckoAPI.getUsdPrice({ date }).then(({ data }) => {
-        const {
-          market_data: {
-            current_price: { usd },
-          },
-        } = data;
-        setUsdPrice(usd);
-      });
-    }
-  };
-
+export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
   const wei = hexToNumber(value);
   const ethAmount = weiToEth(wei);
 
@@ -86,7 +59,6 @@ export const TransactionSquare = ({
       <Square
         data-tip
         data-for={hash}
-        onMouseEnter={fetchUsd}
         target="_blank"
         href={`https://etherscan.io/tx/${hash}`}
       />
@@ -95,11 +67,15 @@ export const TransactionSquare = ({
           <SenderInfo>
             <AddressInfo>
               <InfoType>From</InfoType>
-              <Value>{from.slice(0, 6) + "..." + from.slice(-4)}</Value>
+              <Value>
+                {from ? from.slice(0, 6) + "..." + from.slice(-4) : "Unknown"}
+              </Value>
             </AddressInfo>
             <AddressInfo>
               <InfoType>To</InfoType>
-              <Value>{to.slice(0, 6) + "..." + to.slice(-4)}</Value>
+              <Value>
+                {to ? to.slice(0, 6) + "..." + to.slice(-4) : "Unknown"}
+              </Value>
             </AddressInfo>
           </SenderInfo>
           <PriceInfo>
@@ -107,7 +83,9 @@ export const TransactionSquare = ({
             <Value>
               {ethAmount.toFixed(3)} ETH{" "}
               <UsdPrice>
-                ${(ethAmount * usdPrice).toFixed(2)} @ ${usdPrice.toFixed(2)}
+                ${(ethAmount * ethToUsdPrice).toFixed(2)} @ ${ethToUsdPrice.toFixed(
+                  2
+                )}
               </UsdPrice>
             </Value>
           </PriceInfo>
