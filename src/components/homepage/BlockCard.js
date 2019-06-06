@@ -111,7 +111,7 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
       <Grid>
         {chunksOfTen.map((chunk, i) => (
           <Row key={i}>
-            {chunk.map(({ hash, from, to, value, input }) => (
+            {chunk.map(({ hash, from, to, value }) => (
               <TransactionSquare
                 key={hash}
                 hash={hash}

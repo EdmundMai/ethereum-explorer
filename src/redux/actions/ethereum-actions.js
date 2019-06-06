@@ -17,9 +17,15 @@ const ACTIONS = Object.freeze({
     type: FETCH_BLOCK,
     payload: { blockNumber },
   }),
-  fetchBlockSuccess: ({ number, timestamp, transactions }) => ({
+  fetchBlockSuccess: ({
+    number,
+    timestamp,
+    transactions,
+    gasLimit,
+    gasUsed,
+  }) => ({
     type: FETCH_BLOCK_SUCCESS,
-    payload: { number, timestamp, transactions },
+    payload: { number, timestamp, transactions, gasLimit, gasUsed },
   }),
   fetchBlockFailure: ({ error }) => ({
     type: FETCH_BLOCK_FAILURE,

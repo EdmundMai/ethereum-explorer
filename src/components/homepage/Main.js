@@ -33,7 +33,12 @@ const StyledLink = styled.a`
 
 const NavigationSection = styled.div``;
 
-export const Main = ({ blocks, fetchBlockRange }) => {
+export const Main = ({
+  blocks,
+  fetchBlockRange,
+  averageGasPrice,
+  averageBlockFullness,
+}) => {
   const [latestBlockNumber, setLatestBlockNumber] = useState(0);
 
   useEffect(() => {
@@ -64,9 +69,9 @@ export const Main = ({ blocks, fetchBlockRange }) => {
       <Explorer>
         <Header
           currentBlock={latestBlockNumber}
-          averageGasPrice={87}
+          averageGasPrice={averageGasPrice}
           averageBlockSize={8.2}
-          averagaeBlockFullness={0.88}
+          averagaeBlockFullness={averageBlockFullness}
         />
         <BlockGrid blocks={blocks} />
       </Explorer>
