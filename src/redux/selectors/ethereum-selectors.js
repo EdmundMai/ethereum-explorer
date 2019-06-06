@@ -18,6 +18,11 @@ export const getAverageGasPrice = createSelector([getBlocks], blocks => {
   return mean.toFixed(0);
 });
 
+export const getAverageBlockSize = createSelector([getBlocks], blocks => {
+  const mean = _.meanBy(blocks, "gasUsed") || 0;
+  return (mean / 1000000.0).toFixed(2);
+});
+
 export const getAverageBlockFullness = createSelector([getBlocks], blocks => {
   const mean =
     _.meanBy(blocks, ({ gasUsed, gasLimit }) => gasUsed / gasLimit) || 0;

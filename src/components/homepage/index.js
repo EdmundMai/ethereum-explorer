@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   getAverageGasPrice,
   getAverageBlockFullness,
+  getAverageBlockSize,
 } from "../../redux/selectors/ethereum-selectors";
 
 import ethereumActions from "../../redux/actions/ethereum-actions";
@@ -15,12 +16,14 @@ export const Homepage = ({
   fetchBlockRange,
   averageGasPrice,
   averageBlockFullness,
+  averageBlockSize,
 }) => (
   <Main
     blocks={blocks}
     fetchBlockRange={fetchBlockRange}
     averageGasPrice={averageGasPrice}
     averageBlockFullness={averageBlockFullness}
+    averageBlockSize={averageBlockSize}
   />
 );
 
@@ -28,6 +31,7 @@ const mapStateToProps = state => ({
   blocks: state.ethereum.blocks,
   averageGasPrice: getAverageGasPrice(state),
   averageBlockFullness: getAverageBlockFullness(state),
+  averageBlockSize: getAverageBlockSize(state),
 });
 
 const mapDispatchToProps = dispatch => ({

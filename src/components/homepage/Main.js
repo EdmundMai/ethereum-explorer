@@ -38,6 +38,7 @@ export const Main = ({
   fetchBlockRange,
   averageGasPrice,
   averageBlockFullness,
+  averageBlockSize,
 }) => {
   const [latestBlockNumber, setLatestBlockNumber] = useState(0);
 
@@ -68,9 +69,9 @@ export const Main = ({
       </Navigation>
       <Explorer>
         <Header
-          currentBlock={latestBlockNumber}
+          currentBlock={latestBlockNumber.toLocaleString()}
           averageGasPrice={averageGasPrice}
-          averageBlockSize={8.2}
+          averageBlockSize={averageBlockSize}
           averagaeBlockFullness={averageBlockFullness}
         />
         <BlockGrid blocks={blocks} />
