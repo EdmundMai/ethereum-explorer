@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import moment from "moment";
 import _ from "lodash";
+import ReactTooltip from "react-tooltip";
+
+import TransactionSquare from "./TransactionSquare";
 
 const Container = styled.div`
   background-color: #746fa0;
@@ -88,14 +91,26 @@ export const BlockCard = ({ blockNumber, timestamp, transactions }) => {
         </RightHeader>
       </Header>
       <Grid>
-        {chunksOfTen.map(chunk => (
-          <Row>{chunk.map(({ hash }) => <Square key={hash} />)}</Row>
+        {chunksOfTen.map((chunk, i) => (
+          <Row key={i}>
+            {chunk.map(({ hash, from, to, value, input }) => (
+              <TransactionSquare
+                key={hash}
+                hash={hash}
+                from={from}
+                to={to}
+                value={value}
+                input={input}
+              />
+            ))}
+          </Row>
         ))}
       </Grid>
       <MoreTransactionsButton>
         <span>6 more TX</span>
         <span>></span>
       </MoreTransactionsButton>
+      <ReactTooltip place="right" type="light" effect="solid" />
     </Container>
   );
 };

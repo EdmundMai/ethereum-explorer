@@ -19,10 +19,11 @@ export const BlockGrid = ({ blocks }) => {
 
   return (
     <Container>
-      {chunksOfFour.map(chunk => (
-        <Row>
+      {chunksOfFour.map((chunk, i) => (
+        <Row key={i}>
           {chunk.map(({ number, transactions, timestamp }) => (
             <BlockCard
+              key={number}
               blockNumber={number}
               timestamp={timestamp}
               transactions={transactions}

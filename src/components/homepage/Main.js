@@ -43,7 +43,7 @@ export const Main = ({ blocks, fetchBlockRange }) => {
 
       fetchBlockRange({
         startingBlockNumber: blockNumber,
-        endingBlockNumber: blockNumber - 12,
+        endingBlockNumber: blockNumber - 1,
       });
     });
   }, []);
