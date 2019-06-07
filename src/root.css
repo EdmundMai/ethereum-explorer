@@ -1,4 +1,26 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@font-face {
+  font-family: "Akkurat Std";
+  src: local("AkkuratStd-Regular"),
+    url(./assets/fonts/AkkuratStd-Regular.otf) format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Std";
+  src: local("AkkuratStd-Light"),
+    url(./assets/fonts/AkkuratStd-Light.otf) format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Akkurat Std";
+  src: local("AkkuratStd-Mono"),
+    url(./assets/fonts/AkkuratMonoStd.otf) format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 html,
 body,
@@ -13,7 +35,7 @@ body {
 body,
 input,
 button {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Akkurat Std", sans-serif;
 }
 
 #root {

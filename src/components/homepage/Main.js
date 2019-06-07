@@ -29,17 +29,22 @@ const LoadMoreButton = styled.button`
   background-color: #726da3;
   border-radius: 20px;
   border: 1px solid #827dad;
-  border: none;
   color: #ffffff;
   cursor: pointer;
   font-size: 14px;
   outline: none;
   padding: 10px 40px;
   text-transform: uppercase;
+
+  &:disabled {
+    opacity: 0.2;
+  }
 `;
 
 export const Main = ({
   blocks,
+  numberOfBlocksToDisplay,
+  isLoading,
   fetchBlockRange,
   averageGasPrice,
   averageBlockFullness,
@@ -67,14 +72,20 @@ export const Main = ({
       <Navigation />
       <Explorer>
         <Header
+          isLoading={isLoading}
           currentBlock={latestBlockNumber.toLocaleString()}
           averageGasPrice={averageGasPrice}
           averageBlockSize={averageBlockSize}
           averagaeBlockFullness={averageBlockFullness}
         />
-        <BlockGrid blocks={blocks} />
+        <BlockGrid
+          blocks={blocks}
+          numberOfBlocksToDisplay={numberOfBlocksToDisplay}
+          isLoading={isLoading}
+        />
         <Footer>
           <LoadMoreButton
+            disabled={isLoading}
             onClick={() => {
               const { number: oldestBlockNumber } = blocks[blocks.length - 1];
               fetchBlockRange({

@@ -17,15 +17,24 @@ const Title = styled.h4`
   margin-bottom: 10px;
   margin: 0;
   text-transform: uppercase;
+  font-weight: 400;
 `;
 
 const Value = styled.div`
   color: #ffffff;
   letter-spacing: 1px;
+  margin-top: 10px;
 `;
 
 const Amount = styled.span`
-  font-size: 45px;
+  font-size: 50px;
+  font-weight: 300;
+`;
+
+const LoadingStrip = styled.div`
+  width: 235px;
+  height: 60px;
+  background: #5b558f;
 `;
 
 const Unit = styled.span`
@@ -34,6 +43,7 @@ const Unit = styled.span`
 `;
 
 export const Header = ({
+  isLoading,
   currentBlock,
   averageGasPrice,
   averageBlockSize,
@@ -43,27 +53,43 @@ export const Header = ({
     <Statistic>
       <Title>Current Block</Title>
       <Value>
-        <Amount>{currentBlock}</Amount>
+        {isLoading ? <LoadingStrip /> : <Amount>{currentBlock}</Amount>}
       </Value>
     </Statistic>
     <Statistic>
       <Title>Average Gas Price</Title>
       <Value>
-        <Amount>{averageGasPrice}</Amount>
-        <Unit>gwei</Unit>
+        {isLoading ? (
+          <LoadingStrip />
+        ) : (
+          <React.Fragment>
+            <Amount>{averageGasPrice}</Amount>
+            <Unit>gwei</Unit>
+          </React.Fragment>
+        )}
       </Value>
     </Statistic>
     <Statistic>
       <Title>Average Block Size</Title>
       <Value>
-        <Amount>{averageBlockSize}</Amount>
-        <Unit>mgas</Unit>
+        {isLoading ? (
+          <LoadingStrip />
+        ) : (
+          <React.Fragment>
+            <Amount>{averageBlockSize}</Amount>
+            <Unit>mgas</Unit>
+          </React.Fragment>
+        )}
       </Value>
     </Statistic>
     <Statistic>
       <Title>Average Block Fullness</Title>
       <Value>
-        <Amount>{averagaeBlockFullness * 100}%</Amount>
+        {isLoading ? (
+          <LoadingStrip />
+        ) : (
+          <Amount>{averagaeBlockFullness * 100}%</Amount>
+        )}
       </Value>
     </Statistic>
   </Container>

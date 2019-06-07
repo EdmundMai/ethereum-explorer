@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import _ from "lodash";
 
 import BlockCard from "./BlockCard";
+import EmptyCard from "./EmptyCard";
 
 const Container = styled.div`
   display: grid;
@@ -10,17 +12,24 @@ const Container = styled.div`
   padding: 50px;
 `;
 
-export const BlockGrid = ({ blocks }) => {
+export const BlockGrid = ({ blocks, numberOfBlocksToDisplay, isLoading }) => {
+  // const loadingBlocksCount = Math.ceil(
+  // numberOfBlocksToDisplay - blocks.length,
+  // 0
+  // );
   return (
     <Container>
-      {blocks.map(({ number, transactions, timestamp }) => (
-        <BlockCard
-          key={number}
-          blockNumber={number}
-          timestamp={timestamp}
-          transactions={transactions}
-        />
-      ))}
+      {!isLoading &&
+        blocks.map(({ number, transactions, timestamp, isLoading }) => (
+          <BlockCard
+            key={number}
+            blockNumber={number}
+            timestamp={timestamp}
+            transactions={transactions}
+          />
+        ))}
+      {isLoading &&
+        _.range(0, numberOfBlocksToDisplay).map(i => <EmptyCard key={i} />)}
     </Container>
   );
 };

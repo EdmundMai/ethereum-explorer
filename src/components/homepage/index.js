@@ -13,6 +13,8 @@ import Main from "./Main";
 
 export const Homepage = ({
   blocks,
+  numberOfBlocksToDisplay,
+  isLoading,
   fetchBlockRange,
   averageGasPrice,
   averageBlockFullness,
@@ -20,6 +22,8 @@ export const Homepage = ({
 }) => (
   <Main
     blocks={blocks}
+    numberOfBlocksToDisplay={numberOfBlocksToDisplay}
+    isLoading={isLoading}
     fetchBlockRange={fetchBlockRange}
     averageGasPrice={averageGasPrice}
     averageBlockFullness={averageBlockFullness}
@@ -29,6 +33,8 @@ export const Homepage = ({
 
 const mapStateToProps = state => ({
   blocks: state.ethereum.blocks,
+  numberOfBlocksToDisplay: state.ethereum.numberOfBlocksToDisplay,
+  isLoading: state.ethereum.isLoading,
   averageGasPrice: getAverageGasPrice(state),
   averageBlockFullness: getAverageBlockFullness(state),
   averageBlockSize: getAverageBlockSize(state),
