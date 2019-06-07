@@ -4,19 +4,10 @@ import ReactTooltip from "react-tooltip";
 import theme from "../../assets/styles/theme";
 
 import { weiToEth, hexToNumber } from "../../helpers";
+import Square from "./Square";
 
 const Container = styled.div`
   display: flex;
-`;
-
-const Square = styled.a`
-  background-color: ${({ theme }) => theme.square.background.color};
-  display: inline-block;
-  height: 14px;
-  margin: 1px 2px;
-  opacity: ${props =>
-    props.opacity > 1 ? 1 : Math.max(props.opacity, 0.1) / 1.0};
-  width: 14px;
 `;
 
 const Tooltip = styled.div`
