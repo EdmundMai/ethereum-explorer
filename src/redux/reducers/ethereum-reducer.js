@@ -69,7 +69,7 @@ export default (state = initState, action) => {
       return {
         ...state,
         blocks,
-        isLoading: !(state.numberOfBlocksToDisplay === blocks.length),
+        isLoading: state.numberOfBlocksToDisplay !== blocks.length,
       };
 
     default:
