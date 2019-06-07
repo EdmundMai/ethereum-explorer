@@ -60,8 +60,8 @@ export const Main = ({
         setLatestBlockNumber(blockNumber);
 
         fetchBlockRange({
-          startingBlockNumber: blockNumber,
-          endingBlockNumber: blockNumber - DEFAULT_BLOCKS_SHOWN,
+          startingBlockNumber: blockNumber - DEFAULT_BLOCKS_SHOWN,
+          endingBlockNumber: blockNumber,
         });
       });
     },
@@ -91,8 +91,9 @@ export const Main = ({
               onClick={() => {
                 const { number: oldestBlockNumber } = blocks[blocks.length - 1];
                 fetchBlockRange({
-                  startingBlockNumber: oldestBlockNumber - 1,
-                  endingBlockNumber: oldestBlockNumber - (BLOCKS_PER_LOAD + 1),
+                  startingBlockNumber:
+                    oldestBlockNumber - (BLOCKS_PER_LOAD + 1),
+                  endingBlockNumber: oldestBlockNumber - 1,
                 });
               }}>
               Load More
