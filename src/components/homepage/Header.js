@@ -32,9 +32,9 @@ const Amount = styled.span`
 `;
 
 const LoadingStrip = styled.div`
-  width: 235px;
-  height: 60px;
   background: #5b558f;
+  height: 60px;
+  width: 235px;
 `;
 
 const Unit = styled.span`

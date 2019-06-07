@@ -8,7 +8,7 @@ moment.locale("en", {
     past: "%s ago",
     s: "seconds",
     ss: "%ss",
-    m: "a minute",
+    m: "1m",
     mm: "%dm",
     h: "an hour",
     hh: "%dh",
@@ -24,9 +24,9 @@ moment.locale("en", {
 const Container = styled.div`
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
+  height: 40px;
   justify-content: space-between;
   padding: 15px;
-  height: 40px;
 `;
 
 const LeftHeader = styled.div`
@@ -45,7 +45,6 @@ const MinedAgo = styled.h5`
   color: #d9d8e5;
   font-size: 12px;
   letter-spacing: 2px;
-  letter-spacing: 2px;
   margin: 0;
 `;
 
@@ -56,12 +55,13 @@ const TransactionCount = styled.h5`
   font-size: 15px;
   letter-spacing: 2px;
   margin: 0;
+  white-space: nowrap;
 `;
 
 const LoadingStrip = styled.div`
+  background-color: #837fab;
   height: 10px;
   margin-bottom: 5px;
-  background-color: #837fab;
   width: ${props => (props.width ? `${props.width}px` : "50px")};
 `;
 

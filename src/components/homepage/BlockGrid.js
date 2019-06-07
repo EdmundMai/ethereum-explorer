@@ -12,26 +12,20 @@ const Container = styled.div`
   padding: 50px;
 `;
 
-export const BlockGrid = ({ blocks, numberOfBlocksToDisplay, isLoading }) => {
-  // const loadingBlocksCount = Math.ceil(
-  // numberOfBlocksToDisplay - blocks.length,
-  // 0
-  // );
-  return (
-    <Container>
-      {!isLoading &&
-        blocks.map(({ number, transactions, timestamp, isLoading }) => (
-          <BlockCard
-            key={number}
-            blockNumber={number}
-            timestamp={timestamp}
-            transactions={transactions}
-          />
-        ))}
-      {isLoading &&
-        _.range(0, numberOfBlocksToDisplay).map(i => <EmptyCard key={i} />)}
-    </Container>
-  );
-};
+export const BlockGrid = ({ blocks, numberOfBlocksToDisplay, isLoading }) => (
+  <Container>
+    {!isLoading &&
+      blocks.map(({ number, transactions, timestamp, isLoading }) => (
+        <BlockCard
+          key={number}
+          blockNumber={number}
+          timestamp={timestamp}
+          transactions={transactions}
+        />
+      ))}
+    {isLoading &&
+      _.range(0, numberOfBlocksToDisplay).map(i => <EmptyCard key={i} />)}
+  </Container>
+);
 
 export default BlockGrid;

@@ -1,8 +1,6 @@
 import ethereumActions from "../actions/ethereum-actions";
 import _ from "lodash";
 
-import { DEFAULT_BLOCKS_SHOWN } from "../../config";
-
 const initState = {
   isLoading: true,
   numberOfBlocksToDisplay: 0,

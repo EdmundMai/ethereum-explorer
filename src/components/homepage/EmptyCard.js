@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import _ from "lodash";
 
 import CardWrapper from "./CardWrapper";
@@ -10,7 +9,9 @@ import Square from "./Square";
 const EmptyCard = () => (
   <CardWrapper>
     <CardHeader isLoading={true} />
-    <CardGrid>{_.range(0, 25).map(i => <Square opacity={0.2} />)}</CardGrid>
+    <CardGrid>
+      {_.range(0, 25).map(i => <Square key={i} opacity={0.2} />)}
+    </CardGrid>
   </CardWrapper>
 );
 
