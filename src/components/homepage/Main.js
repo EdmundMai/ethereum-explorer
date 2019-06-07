@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "../../assets/styles/theme";
 
 import Navigation from "../shared/Navigation";
 import Header from "./Header";
@@ -14,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Explorer = styled.div`
-  background-color: #494389;
+  background-color: ${({ theme }) => theme.body.background.color};
   width: 100%;
 `;
 
@@ -26,10 +27,10 @@ const Footer = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
-  background-color: #726da3;
+  background-color: ${({ theme }) => theme.blockCard.background.color};
   border-radius: 20px;
-  border: 1px solid #827dad;
-  color: #ffffff;
+  border: 1px solid ${({ theme }) => theme.loadingButton.border.color};
+  color: ${({ theme }) => theme.body.primary.color};
   cursor: pointer;
   font-size: 14px;
   outline: none;
@@ -68,36 +69,38 @@ export const Main = ({
   );
 
   return (
-    <Container>
-      <Navigation />
-      <Explorer>
-        <Header
-          isLoading={isLoading}
-          currentBlock={latestBlockNumber.toLocaleString()}
-          averageGasPrice={averageGasPrice}
-          averageBlockSize={averageBlockSize}
-          averagaeBlockFullness={averageBlockFullness}
-        />
-        <BlockGrid
-          blocks={blocks}
-          numberOfBlocksToDisplay={numberOfBlocksToDisplay}
-          isLoading={isLoading}
-        />
-        <Footer>
-          <LoadMoreButton
-            disabled={isLoading}
-            onClick={() => {
-              const { number: oldestBlockNumber } = blocks[blocks.length - 1];
-              fetchBlockRange({
-                startingBlockNumber: oldestBlockNumber - 1,
-                endingBlockNumber: oldestBlockNumber - (BLOCKS_PER_LOAD + 1),
-              });
-            }}>
-            Load More
-          </LoadMoreButton>
-        </Footer>
-      </Explorer>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Navigation />
+        <Explorer>
+          <Header
+            isLoading={isLoading}
+            currentBlock={latestBlockNumber.toLocaleString()}
+            averageGasPrice={averageGasPrice}
+            averageBlockSize={averageBlockSize}
+            averagaeBlockFullness={averageBlockFullness}
+          />
+          <BlockGrid
+            blocks={blocks}
+            numberOfBlocksToDisplay={numberOfBlocksToDisplay}
+            isLoading={isLoading}
+          />
+          <Footer>
+            <LoadMoreButton
+              disabled={isLoading}
+              onClick={() => {
+                const { number: oldestBlockNumber } = blocks[blocks.length - 1];
+                fetchBlockRange({
+                  startingBlockNumber: oldestBlockNumber - 1,
+                  endingBlockNumber: oldestBlockNumber - (BLOCKS_PER_LOAD + 1),
+                });
+              }}>
+              Load More
+            </LoadMoreButton>
+          </Footer>
+        </Explorer>
+      </Container>
+    </ThemeProvider>
   );
 };
 

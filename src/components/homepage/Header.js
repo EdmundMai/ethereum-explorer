@@ -1,8 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import theme from "../../assets/styles/theme";
 
 const Container = styled.div`
-  background-color: #433d7b;
+  background-color: ${({ theme }) => theme.header.background.color};
   display: flex;
   padding: 50px;
 `;
@@ -12,7 +13,7 @@ const Statistic = styled.div`
 `;
 
 const Title = styled.h4`
-  color: #9f9cbd;
+  color: ${({ theme }) => theme.header.title.color};
   font-size: 15px;
   margin-bottom: 10px;
   margin: 0;
@@ -21,7 +22,7 @@ const Title = styled.h4`
 `;
 
 const Value = styled.div`
-  color: #ffffff;
+  color: ${({ theme }) => theme.header.value.color};
   letter-spacing: 1px;
   margin-top: 10px;
 `;
@@ -32,7 +33,7 @@ const Amount = styled.span`
 `;
 
 const LoadingStrip = styled.div`
-  background: #5b558f;
+  background-color: ${({ theme }) => theme.header.loading.color};
   height: 60px;
   width: 235px;
 `;
@@ -49,50 +50,52 @@ export const Header = ({
   averageBlockSize,
   averagaeBlockFullness,
 }) => (
-  <Container>
-    <Statistic>
-      <Title>Current Block</Title>
-      <Value>
-        {isLoading ? <LoadingStrip /> : <Amount>{currentBlock}</Amount>}
-      </Value>
-    </Statistic>
-    <Statistic>
-      <Title>Average Gas Price</Title>
-      <Value>
-        {isLoading ? (
-          <LoadingStrip />
-        ) : (
-          <React.Fragment>
-            <Amount>{averageGasPrice}</Amount>
-            <Unit>gwei</Unit>
-          </React.Fragment>
-        )}
-      </Value>
-    </Statistic>
-    <Statistic>
-      <Title>Average Block Size</Title>
-      <Value>
-        {isLoading ? (
-          <LoadingStrip />
-        ) : (
-          <React.Fragment>
-            <Amount>{averageBlockSize}</Amount>
-            <Unit>mgas</Unit>
-          </React.Fragment>
-        )}
-      </Value>
-    </Statistic>
-    <Statistic>
-      <Title>Average Block Fullness</Title>
-      <Value>
-        {isLoading ? (
-          <LoadingStrip />
-        ) : (
-          <Amount>{averagaeBlockFullness * 100}%</Amount>
-        )}
-      </Value>
-    </Statistic>
-  </Container>
+  <ThemeProvider theme={theme}>
+    <Container>
+      <Statistic>
+        <Title>Current Block</Title>
+        <Value>
+          {isLoading ? <LoadingStrip /> : <Amount>{currentBlock}</Amount>}
+        </Value>
+      </Statistic>
+      <Statistic>
+        <Title>Average Gas Price</Title>
+        <Value>
+          {isLoading ? (
+            <LoadingStrip />
+          ) : (
+            <React.Fragment>
+              <Amount>{averageGasPrice}</Amount>
+              <Unit>gwei</Unit>
+            </React.Fragment>
+          )}
+        </Value>
+      </Statistic>
+      <Statistic>
+        <Title>Average Block Size</Title>
+        <Value>
+          {isLoading ? (
+            <LoadingStrip />
+          ) : (
+            <React.Fragment>
+              <Amount>{averageBlockSize}</Amount>
+              <Unit>mgas</Unit>
+            </React.Fragment>
+          )}
+        </Value>
+      </Statistic>
+      <Statistic>
+        <Title>Average Block Fullness</Title>
+        <Value>
+          {isLoading ? (
+            <LoadingStrip />
+          ) : (
+            <Amount>{averagaeBlockFullness * 100}%</Amount>
+          )}
+        </Value>
+      </Statistic>
+    </Container>
+  </ThemeProvider>
 );
 
 export default Header;

@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import ReactTooltip from "react-tooltip";
+import theme from "../../assets/styles/theme";
 
 import { weiToEth, hexToNumber } from "../../helpers";
 
@@ -9,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Square = styled.a`
-  background-color: white;
+  background-color: ${({ theme }) => theme.square.background.color};
   display: inline-block;
   height: 14px;
   margin: 1px 2px;
@@ -34,14 +35,14 @@ const AddressInfo = styled.div`
 `;
 
 const InfoType = styled.h5`
-  color: #666666;
+  color: ${({ theme }) => theme.tooltip.secondary.color};
   font-size: 12px;
   margin: 0;
   text-transform: uppercase;
 `;
 
 const Value = styled.h5`
-  color: #3a3479;
+  color: ${({ theme }) => theme.tooltip.primary.color};
   font-size: 13px;
   margin: 0;
   letter-spacing: 1px;
@@ -53,8 +54,8 @@ const PriceInfo = styled.div`
 `;
 
 const UsdPrice = styled.span`
+  color: ${({ theme }) => theme.tooltip.tertiary.color};
   margin-left: 5px;
-  color: #7e7e7e;
 `;
 
 export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
@@ -62,44 +63,46 @@ export const TransactionSquare = ({ hash, from, to, value, ethToUsdPrice }) => {
   const ethAmount = parseFloat(weiToEth(wei));
 
   return (
-    <Container>
-      <Square
-        opacity={ethAmount}
-        data-tip
-        data-for={hash}
-        target="_blank"
-        href={`https://etherscan.io/tx/${hash}`}
-      />
-      <ReactTooltip id={hash} place="right" type="light" effect="solid">
-        <Tooltip>
-          <SenderInfo>
-            <AddressInfo>
-              <InfoType>From</InfoType>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Square
+          opacity={ethAmount}
+          data-tip
+          data-for={hash}
+          target="_blank"
+          href={`https://etherscan.io/tx/${hash}`}
+        />
+        <ReactTooltip id={hash} place="right" type="light" effect="solid">
+          <Tooltip>
+            <SenderInfo>
+              <AddressInfo>
+                <InfoType>From</InfoType>
+                <Value>
+                  {from ? from.slice(0, 6) + "..." + from.slice(-4) : "Unknown"}
+                </Value>
+              </AddressInfo>
+              <AddressInfo>
+                <InfoType>To</InfoType>
+                <Value>
+                  {to ? to.slice(0, 6) + "..." + to.slice(-4) : "Unknown"}
+                </Value>
+              </AddressInfo>
+            </SenderInfo>
+            <PriceInfo>
+              <InfoType>Value</InfoType>
               <Value>
-                {from ? from.slice(0, 6) + "..." + from.slice(-4) : "Unknown"}
+                {ethAmount.toFixed(3)} ETH{" "}
+                <UsdPrice>
+                  ${(ethAmount * ethToUsdPrice).toFixed(2)} @ ${ethToUsdPrice.toFixed(
+                    2
+                  )}
+                </UsdPrice>
               </Value>
-            </AddressInfo>
-            <AddressInfo>
-              <InfoType>To</InfoType>
-              <Value>
-                {to ? to.slice(0, 6) + "..." + to.slice(-4) : "Unknown"}
-              </Value>
-            </AddressInfo>
-          </SenderInfo>
-          <PriceInfo>
-            <InfoType>Value</InfoType>
-            <Value>
-              {ethAmount.toFixed(3)} ETH{" "}
-              <UsdPrice>
-                ${(ethAmount * ethToUsdPrice).toFixed(2)} @ ${ethToUsdPrice.toFixed(
-                  2
-                )}
-              </UsdPrice>
-            </Value>
-          </PriceInfo>
-        </Tooltip>
-      </ReactTooltip>
-    </Container>
+            </PriceInfo>
+          </Tooltip>
+        </ReactTooltip>
+      </Container>
+    </ThemeProvider>
   );
 };
 

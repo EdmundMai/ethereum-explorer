@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export default styled.a`
-  background-color: white;
+  background-color: ${({ theme }) =>
+    theme ? "#ffffff" : theme.square.background.color};
   display: inline-block;
   height: 14px;
   margin: 1px 2px;

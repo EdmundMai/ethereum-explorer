@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import moment from "moment";
+import theme from "../../assets/styles/theme";
 
 moment.locale("en", {
   relativeTime: {
@@ -35,14 +36,15 @@ const LeftHeader = styled.div`
 `;
 
 const BlockNumber = styled.h5`
-  color: #ffffff;
+  color: ${({ theme }) => theme.body.primary.color};
   font-size: 15px;
   letter-spacing: 2px;
   margin: 0;
 `;
 
 const MinedAgo = styled.h5`
-  color: #d9d8e5;
+  color: ${({ theme }) => theme.body.secondary.color};
+  font-weight: 400;
   font-size: 12px;
   letter-spacing: 2px;
   margin: 0;
@@ -51,7 +53,7 @@ const MinedAgo = styled.h5`
 const RightHeader = styled.div``;
 
 const TransactionCount = styled.h5`
-  color: #ffffff;
+  color: ${({ theme }) => theme.body.primary.color};
   font-size: 15px;
   letter-spacing: 2px;
   margin: 0;
@@ -59,7 +61,7 @@ const TransactionCount = styled.h5`
 `;
 
 const LoadingStrip = styled.div`
-  background-color: #837fab;
+  background-color: ${({ theme }) => theme.body.loading.color};
   height: 10px;
   margin-bottom: 5px;
   width: ${props => (props.width ? `${props.width}px` : "50px")};
@@ -71,31 +73,33 @@ const CardHeader = ({
   timestamp,
   transactionCount,
 }) => (
-  <Container>
-    <LeftHeader>
-      {isLoading ? (
-        <React.Fragment>
-          <LoadingStrip width={80} />
-          <LoadingStrip width={60} />
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <BlockNumber>#{blockNumber.toLocaleString()}</BlockNumber>
-          <MinedAgo>mined {moment(timestamp * 1000).fromNow()}</MinedAgo>
-        </React.Fragment>
-      )}
-    </LeftHeader>
-    <RightHeader>
-      {isLoading ? (
-        <LoadingStrip width={40} />
-      ) : (
-        <TransactionCount>
-          {transactionCount}
-          {"  "}TXs
-        </TransactionCount>
-      )}
-    </RightHeader>
-  </Container>
+  <ThemeProvider theme={theme}>
+    <Container>
+      <LeftHeader>
+        {isLoading ? (
+          <React.Fragment>
+            <LoadingStrip width={80} />
+            <LoadingStrip width={60} />
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <BlockNumber>#{blockNumber.toLocaleString()}</BlockNumber>
+            <MinedAgo>mined {moment(timestamp * 1000).fromNow()}</MinedAgo>
+          </React.Fragment>
+        )}
+      </LeftHeader>
+      <RightHeader>
+        {isLoading ? (
+          <LoadingStrip width={40} />
+        ) : (
+          <TransactionCount>
+            {transactionCount}
+            {"  "}TXs
+          </TransactionCount>
+        )}
+      </RightHeader>
+    </Container>
+  </ThemeProvider>
 );
 
 export default CardHeader;

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
 import moment from "moment";
 import ReactTooltip from "react-tooltip";
+import theme from "../../assets/styles/theme";
 
 import CoinGeckoAPI from "../../services/coin-gecko-api";
 
@@ -17,7 +18,7 @@ const MoreTransactionsButton = styled.button`
   background: none;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border: none;
-  color: #dad9e6;
+  color: ${({ theme }) => theme.body.secondary.color};
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -34,7 +35,7 @@ const ButtonText = styled.div`
 `;
 
 const CaretWrapper = styled.div`
-  background-color: #9390b5;
+  background-color: ${({ theme }) => theme.caret.background.color};
   padding: 9px 12px;
 `;
 
@@ -69,40 +70,42 @@ const BlockCard = ({ blockNumber, timestamp, transactions }) => {
     : transactions.slice(100, 200);
 
   return (
-    <CardWrapper>
-      <CardHeader
-        blockNumber={blockNumber}
-        timestamp={timestamp}
-        transactionCount={transactions.length}
-      />
-      <CardGrid>
-        {paginatedTransactions.map(({ hash, from, to, value }) => (
-          <TransactionSquare
-            key={hash}
-            hash={hash}
-            from={from}
-            to={to}
-            value={value}
-            ethToUsdPrice={ethToUsdPrice}
-          />
-        ))}
-      </CardGrid>
-      <MoreTransactionsButton
-        hide={transactions.length <= 100}
-        onClick={() => setIsViewingFirstPage(!isViewingFirstPage)}>
-        {isViewingFirstPage ? (
-          <React.Fragment>
-            <ButtonText>{transactions.length - 100} more TX</ButtonText>
-            <CaretWrapper>
-              <Caret src={ICON_CARET_RIGHT} />
-            </CaretWrapper>
-          </React.Fragment>
-        ) : (
-          <ButtonText>Back</ButtonText>
-        )}
-      </MoreTransactionsButton>
-      <ReactTooltip place="right" type="light" effect="solid" />
-    </CardWrapper>
+    <ThemeProvider theme={theme}>
+      <CardWrapper>
+        <CardHeader
+          blockNumber={blockNumber}
+          timestamp={timestamp}
+          transactionCount={transactions.length}
+        />
+        <CardGrid>
+          {paginatedTransactions.map(({ hash, from, to, value }) => (
+            <TransactionSquare
+              key={hash}
+              hash={hash}
+              from={from}
+              to={to}
+              value={value}
+              ethToUsdPrice={ethToUsdPrice}
+            />
+          ))}
+        </CardGrid>
+        <MoreTransactionsButton
+          hide={transactions.length <= 100}
+          onClick={() => setIsViewingFirstPage(!isViewingFirstPage)}>
+          {isViewingFirstPage ? (
+            <React.Fragment>
+              <ButtonText>{transactions.length - 100} more TX</ButtonText>
+              <CaretWrapper>
+                <Caret src={ICON_CARET_RIGHT} />
+              </CaretWrapper>
+            </React.Fragment>
+          ) : (
+            <ButtonText>Back</ButtonText>
+          )}
+        </MoreTransactionsButton>
+        <ReactTooltip place="right" type="light" effect="solid" />
+      </CardWrapper>
+    </ThemeProvider>
   );
 };
 
