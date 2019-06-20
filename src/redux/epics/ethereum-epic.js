@@ -5,7 +5,7 @@ import InfuraAPI from "../../services/infura-api";
 import _ from "lodash";
 
 import ethereumActions from "../actions/ethereum-actions";
-import { hexToNumber } from "../../helpers";
+import { hexToNumber, numberToHex } from "../../helpers";
 
 const fetchBlockRangeEpic = action$ =>
   action$.pipe(
@@ -25,8 +25,11 @@ const fetchBlockEpic = action$ =>
     mergeMap(action => {
       const { blockNumber } = action.payload;
 
-      return from(InfuraAPI.getBlockByNumber(blockNumber)).pipe(
+      const blockNumberInHex = numberToHex(blockNumber);
+
+      return from(InfuraAPI.getBlockByNumber(blockNumberInHex)).pipe(
         map(({ data: { result } }) => {
+          console.log("xxxxxxxxxxxx: ", result);
           const number = hexToNumber(result.number);
           const timestamp = hexToNumber(result.timestamp);
           const gasLimit = hexToNumber(result.gasLimit);

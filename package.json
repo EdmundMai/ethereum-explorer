@@ -16,7 +16,8 @@
     "redux-observable": "^1.1.0",
     "reselect": "^4.0.0",
     "rxjs": "^6.5.2",
-    "styled-components": "^4.2.1"
+    "styled-components": "^4.2.1",
+    "web3-utils": "^1.0.0-beta.55"
   },
   "scripts": {
     "start": "react-scripts start",
