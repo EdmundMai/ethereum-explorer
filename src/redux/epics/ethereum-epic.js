@@ -29,7 +29,6 @@ const fetchBlockEpic = action$ =>
 
       return from(InfuraAPI.getBlockByNumber(blockNumberInHex)).pipe(
         map(({ data: { result } }) => {
-          console.log("xxxxxxxxxxxx: ", result);
           const number = hexToNumber(result.number);
           const timestamp = hexToNumber(result.timestamp);
           const gasLimit = hexToNumber(result.gasLimit);
